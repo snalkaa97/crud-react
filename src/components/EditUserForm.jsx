@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const AddUserForm = (props) => {
-	const initialFormState = { id: null, name: "", username: "" };
-	const [user, setUser] = useState(initialFormState);
+const EditUserForm = (props) => {
+	const [user, setUser] = useState(props.currentUser);
 
 	const handlerEvents = (e) => {
 		setUser({ ...user, [e.target.name]: e.target.value });
 	};
+
+	useEffect(() => {
+		setUser(props.currentUser);
+	}, [props]);
+
 	return (
 		<div>
-			<h2>Add user</h2>
+			<h2>Edit user</h2>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
 					if (!user.name || !user.username) return;
-					props.addUser(user);
-					setUser(initialFormState);
+					props.updateUser(user.id, user);
+					// setUser(initialFormState);
 				}}
 			>
 				<label>Name</label>
@@ -32,10 +36,11 @@ const AddUserForm = (props) => {
 					value={user.username}
 					onChange={handlerEvents}
 				/>
-				<button>Add new user</button>
+				<button>Save</button>
+				<button className="button muted-button">Cancel</button>
 			</form>
 		</div>
 	);
 };
 
-export default AddUserForm;
+export default EditUserForm;
