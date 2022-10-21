@@ -48,7 +48,11 @@ const App = () => {
 			<div className="flex-row">
 				<div className="flex-large">
 					{editing ? (
-						<EditUserForm currentUser={currentUser} updateUser={updateUser} />
+						<EditUserForm
+							currentUser={currentUser}
+							updateUser={updateUser}
+							setEditing={setEditing}
+						/>
 					) : (
 						<AddUserForm addUser={addUser} />
 					)}

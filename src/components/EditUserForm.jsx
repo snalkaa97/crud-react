@@ -37,7 +37,12 @@ const EditUserForm = (props) => {
 					onChange={handlerEvents}
 				/>
 				<button>Save</button>
-				<button className="button muted-button">Cancel</button>
+				<button
+					className="button muted-button"
+					onClick={() => props.setEditing(false)}
+				>
+					Cancel
+				</button>
 			</form>
 		</div>
 	);
