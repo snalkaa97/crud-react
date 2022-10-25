@@ -1,5 +1,11 @@
-import React from "react";
+import { useEffect, useState } from "react";
 const UserTable = (props) => {
+	const [currentId, setId] = useState();
+	useEffect(() => {
+		if (!props.editing) {
+			setId("");
+		}
+	}, [currentId, props.editing]);
 	return (
 		<table>
 			<thead>
@@ -19,16 +25,23 @@ const UserTable = (props) => {
 								<td>
 									<button
 										className="button muted-button"
-										onClick={() => props.editRow(user)}
+										onClick={() => {
+											setId(user.id);
+											props.editRow(user);
+										}}
 									>
 										Edit
 									</button>
-									<button
-										className="button muted-button"
-										onClick={() => props.deleteUser(user.id)}
-									>
-										Delete
-									</button>
+									{currentId !== user.id && (
+										<button
+											className="button muted-button"
+											onClick={() => {
+												props.deleteUser(user.id);
+											}}
+										>
+											Delete
+										</button>
+									)}
 								</td>
 							</tr>
 						);

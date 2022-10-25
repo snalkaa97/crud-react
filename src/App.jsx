@@ -38,9 +38,7 @@ const App = () => {
 		setUsers(users.map((user) => (user.id === id ? updatedUser : user)));
 	};
 
-	useEffect(() => {
-		console.log(users);
-	}, [users]);
+	useEffect(() => {}, [users]);
 
 	return (
 		<div className="container">
@@ -59,7 +57,12 @@ const App = () => {
 				</div>
 				<div className="flex-large">
 					<h2>View users</h2>
-					<UserTable users={users} deleteUser={deleteUser} editRow={editRow} />
+					<UserTable
+						users={users}
+						deleteUser={deleteUser}
+						editRow={editRow}
+						editing={editing}
+					/>
 				</div>
 			</div>
 		</div>
